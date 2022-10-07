@@ -1,11 +1,14 @@
-board = [ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',]
+board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
 def print_state(state):
+    print('|0||1||2|')
+    print('---------')
     for i, c in enumerate(state):
-        if (i + 1)%3 == 0:
+        if (i + 1) % 3 == 0:
             print(f'{c}')
         else:
-            print(f'{c}|', end='')
+            print(f' {c}|', end='')
+    print('---------')
 
 winning_combinations = [(0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6)]
 
@@ -18,7 +21,14 @@ def get_winner(state, combinations):
 def play_game(board):
     current_sign = 'X'
     while (get_winner(board, winning_combinations)==''):
-        index = int(input(f'Where do you want to draw {current_sign}?'))
+        index = int(input(f'Where do you want to draw {current_sign}? ( 0 <= {current_sign} <= 8)'))
+        if index not in range(9):
+            print('Wrong num, try again.')
+            continue
+        if board[index] != ' ':
+            print('Cell is occupied, try again')
+            continue
+
         board[index] = current_sign
 
         print_state(board)
