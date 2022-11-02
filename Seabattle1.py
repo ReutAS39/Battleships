@@ -9,9 +9,6 @@ class Dot:
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
 
-#    def __repr__(self): #не работает, только для теста
-#        return f"({self.x}, {self.y})"
-
 class BoardException(Exception):
     pass
 
@@ -135,7 +132,7 @@ class Board:
     def begin(self):
         self.busy = []
 
-    def defeat(self):   # Добавлен из вебинара
+    def defeat(self):
         return self.count == len(self.ships)
 
 class Player:
@@ -248,14 +245,13 @@ class Game:
             if repeat:
                 num -= 1
 
-            if self.ai.board.count == 7: #len(self.ai.board.ships)
-            #if self.ai.board.defeat()
+            if self.ai.board.defeat():
                 self.print_boards()
                 print("-" * 20)
                 print("Пользователь выиграл!")
                 break
 
-            if self.us.board.count == 7:
+            if self.us.board.defeat():
             #if self.us.board.defeat()
                 self.print_boards()
                 print("-" * 20)
